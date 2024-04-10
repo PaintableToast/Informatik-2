@@ -16,7 +16,15 @@ sumList (x:xs) = x + sumList(xs)
 
 -- Aufgabe 1.3.b Alle Elemente mit übergebenen Operator
 foldList :: (Double -> Double -> Double) -> [Double] -> Double
-foldList _ [] = 0
-foldList f (x:xs) = f x (foldList f xs)
+foldList _ [] = 0 
+foldList f [x] = x 
+foldList f (x:y:xs) = foldList f (f x y : xs) 
 
--- Aufgabe 1.3.c 
+-- Aufgabe 1.3.c Funktion die Liste zurückgibt mapList 
+mapList :: (Int -> Int) -> [Int] -> [Int]
+mapList _ [] = []
+mapList f (x:xs) = f x : mapList f xs
+
+-- Aufgabe 1.4 
+tableInt :: (Int -> Int) -> [Int] -> String
+tableInt f xs = 

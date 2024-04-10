@@ -1,5 +1,6 @@
 % preamble.tex aus der Vorlesung
 \documentclass[a4paper]{article}
+\usepackage[a4paper,left=1.5cm,right=1.5cm,top=2cm,bottom=3cm]{geometry}
 \usepackage{etex}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
@@ -109,8 +110,96 @@ ist dasselbe wie:
 \end{align*}
 \subsection{Datei Laden}
 \begin{verbatim}
-    :l [file]
+    :l filename
 \end{verbatim}
 
+\section{Haskell Pattern Matching}
+\subsection{Verschiedene Pattern}
+\begin{itemize}
+    \item jedes einzelnte Pattern ist einzelnt
+    \item es kann mehrere Patterns angegeben werden
+    \item von oben nach unten
+\end{itemize}
+\subsubsection{Beispiel}
+\begin{verbatim}
+    -- negation
+    neg :: Bool -> Bool
+    neg False = True
+
+    -- Konjunktion
+    (<&>) :: Bool -> Bool -> Bool
+    (<&>) True True = True
+    (<&>) _ _ = False
+\end{verbatim}
+
+\subsection{Unterstriche}
+Kann genutzt werdeb un irgendeine Random variable anzugeben.
+
+
+\section{Haskell Alternativen}
+
+\subsection{If - Else}
+\begin{align*}
+    \text{abs}(x) = \begin{cases}
+        -x & x < 0 \\
+        x & \text{sonst}
+    \end{cases}
+\end{align*}
+\subsubsection{Erste Art das umzusetzen}
+\begin{verbatim}
+    absolute :: Int -> Int
+    absolute x = if x < 0 then -x else x
+\end{verbatim}
+\subsubsection{Mehrere Conditions}
+\begin{verbatim}
+    absolute :: Int -> Int
+    absolute x
+        | x < 0 = -x
+        | otherwise = x
+\end{verbatim}
+
+\section{Haskell Rekursion}
+
+\subsection{Beispiel}
+\begin{align*}
+    \text{heron}_n : \R^+ \rightarrow \R^+ \\
+    \text{heron}(n,a) = \begin{cases}
+        (\text{heron}(n - 1, a) + a/\text{heron}(n-1,a))/2 & n > 0 \\
+        a & \text{sonst}
+    \end{cases}
+\end{align*}
+\begin{verbatim}
+    heronA :: (Int, Double) -> Double
+    heronA n a
+        | n > 0 = (heronA(n - 1, a) + a / heronA(n - 1, a))/2
+        | otherwise = a
+\end{verbatim}
+
+\subsection{where - Operator}
+Haskell bietet nicht die Möglichkeit Speicherplatz zu reservieren \\
+Aber man kann where verwenden für lokale Platzhalter definitionen
+
+\begin{verbatim}
+    heronA :: (Int, Double) -> Double
+    heronA n a
+        | n > 0 = (x + a / x)/2
+        | otherwise = a
+        where x = heronA(n - 1, a)
+\end{verbatim}
+
+\subsection{error-Handling}
+\begin{verbatim}
+    fibC :: Int -> Int
+    fibC 0 = 0
+    fibC 1 = 0
+    fibC n
+        | n < 0 = error "illegal argument"
+        | otherwise = fibC(n - 1) + fibC(n - 2)
+\end{verbatim}
+
+\subsection{Um -7 in der Konsole zu benutzen beispielsweise}
+\begin{verbatim}
+    fibC $ -7
+\end{verbatim}
 
 \end{document}
