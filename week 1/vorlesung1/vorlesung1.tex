@@ -1,0 +1,116 @@
+% preamble.tex aus der Vorlesung
+\documentclass[a4paper]{article}
+\usepackage{etex}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{tabto}
+\usepackage{hyphsubst}
+\HyphSubstIfExists{ngerman-x-latest}{%
+  \HyphSubstLet{ngerman}{ngerman-x-latest}}{}
+\HyphSubstIfExists{german-x-latest}{%
+  \HyphSubstLet{german}{german-x-latest}}{}
+\usepackage[english,ngerman]{babel}
+\usepackage{textcomp}
+\usepackage{microtype}
+
+% Figuren Package
+\usepackage{tikz}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.17}
+
+%Math Packages
+\usepackage{nicefrac,mathtools,enumitem}
+\usepackage[all]{xy}
+\usepackage[lite]{amsrefs}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{mathtools}
+
+\newtheorem{definition}[equation]{Definition}
+\newtheorem{satz}[equation]{Satz}
+
+% Math Commands
+\newcommand*{\ksum}[2][n]{\sum^{#1}_{k = #2}}
+\newcommand*{\norm}[1][x]{\|#1\|}
+\newcommand*{\elemof}[2][n]{#1 \in \mathbb{#2} } % Element of (N, Z, Q, R, C)
+\newcommand*{\R}{\mathbb{R}} % R
+\newcommand*{\K}{\mathbb{K}} % K
+\newcommand*{\C}{\mathbb{C}} % C
+\newcommand*{\N}{\mathbb{N}} % N
+
+\newcommand{\complex}[2]{|#1|(\cos (#2) + i \sin (#2))}
+\newcommand*{\Rn}{$\R^n$ } % R^n als Text Print
+
+
+\title{Vorlesung 1}
+\author{Ramon Cemil Kimyon}
+\date{}
+
+
+\begin{document}
+\section{Haskell}
+\subsection{Haskell Typen}
+\[
+\begin{array}{ll}
+    \textsf{Float} & \textnormal{Gleitkomma-Zahlen mit einfacher Genauigkeit 32bit} \\
+    \textsf{Double} & \textnormal{Gleitkomma-Zahlen mit doppelter Genauigkeit 64bit} \\
+    \textsf{Int} & \textnormal{beschränktes Ganzzahl} \\
+    \textsf{Integer} & \textnormal{unbeschränkte Ganzzahl} \\
+    \textsf{Bool} & \textnormal{Wahrheitswerte true/false} \\
+    \textsf{Char} & \textnormal{Zeichen} \\
+    \textsf{Type} & \textnormal{Liste von Typen} \\
+    \textsf{(TypeA, TypeB)} & \textnormal{Paar von Typen Tupel} \\
+    \textsf{TypeA -> TypeB} & \textnormal{Typenfunktion}
+\end{array}
+\]
+\subsection{Haskell Funktion}
+\begin{verbatim}
+    f :: X -> Y
+\end{verbatim}
+\subsubsection{Beispiel}
+\begin{verbatim}
+    sqrt :: Float -> Float
+    first :: (String, Int) -> String
+    second :: (String, Int) -> Int
+    not :: Bool -> Bool
+    and :: [Bool] -> Bool
+    logBase :: Float -> Float -> Float
+\end{verbatim}
+\subsubsection{Anwendung}
+So ruft man die Funktion auf:
+\begin{verbatim}
+    f x
+\end{verbatim}
+\subsubsection{Funktionsaufbau sich ansehen}
+\begin{verbatim}
+    :t Funktionsname
+\end{verbatim}
+\subsection{Operatoren}
+\begin{verbatim}
+    (op) :: X -> Y -> Z
+\end{verbatim}
+\subsubsection{Schreibweise}
+\begin{verbatim}
+    (op) x y 
+    x op y 
+\end{verbatim}
+\subsection{Funktion definieren}
+\begin{verbatim}
+    f :: Int -> Int
+    f x = x * x + x
+\end{verbatim}
+ist dasselbe wie:
+\begin{align*}
+    f : \mathbb{Z} \rightarrow \mathbb{Z} \\
+    f(x) = x^2 + x
+\end{align*}
+\subsection{Datei Laden}
+\begin{verbatim}
+    :l [file]
+\end{verbatim}
+
+
+\end{document}
