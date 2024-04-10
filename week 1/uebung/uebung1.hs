@@ -1,3 +1,5 @@
+import Data.Char (toLower)
+
 -- Aufgabe 1.1 Quadratische Funktion a*x^2 + b*x + c 
 quadratic :: (Int, Int, Int) -> Int -> Int
 quadratic (a, b, c) x = a * x^2 + b * x + c
@@ -27,4 +29,19 @@ mapList f (x:xs) = f x : mapList f xs
 
 -- Aufgabe 1.4 
 tableInt :: (Int -> Int) -> [Int] -> String
-tableInt f xs = 
+tableInt _ [] = ""
+tableInt f (x:xs) = (show x) ++ ":" ++ (show (f x)) ++ "\n" ++ tableInt f xs
+
+-- Aufgabe 2.1
+containsList :: [Int] -> Int -> Bool
+containsList [] _ = False
+containsList (x:xs) y
+    | x == y = True
+    | otherwise = containsList xs y
+
+-- Aufgabe 2.2
+countList :: [Char] -> Char -> Int
+countList [] _ = 0
+countList (x:xs) y
+    | toLower x == toLower y = 1 + countList xs y
+    | otherwise = countList xs y
